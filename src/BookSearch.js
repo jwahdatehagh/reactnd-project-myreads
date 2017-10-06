@@ -20,9 +20,14 @@ class BookSearch extends React.Component {
     super(props)
 
     this.onSeachChange = this.onSeachChange.bind(this)
+
+    // debounce the search to prevent rate limiting / too many API requests
     this.searchBooks = debounce(500, this.searchBooks)
   }
 
+  /**
+   * Handle changes of the search string.
+   */
   onSeachChange(event) {
     this.clearBooks()
 
@@ -30,6 +35,9 @@ class BookSearch extends React.Component {
     if (searchString) this.searchBooks(searchString)
   }
 
+  /**
+   * Perform an API request to search books.
+   */
   async searchBooks(searchString) {
     const books = await search(searchString, 6)
 
@@ -38,6 +46,9 @@ class BookSearch extends React.Component {
     }
   }
 
+  /**
+   * If there are books in the state, clear them.
+   */
   clearBooks() {
     if (this.state.books.length) this.setState({ books: [] })
   }

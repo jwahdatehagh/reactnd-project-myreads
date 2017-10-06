@@ -14,6 +14,9 @@ class BookListing extends React.Component {
     this.moveBook = this.moveBook.bind(this)
   }
 
+  /**
+   * Initiate moving the current book to a shelf.
+   */
   moveBook(event) {
     const book = this.props.book
     const newShelf = event.target.value
